@@ -61,7 +61,11 @@ def main():
     print(render(board))
 
     while True:
-        raw = input(f"\nPlayer {player}, enter position (1-9): ").strip()
+        try:
+            raw = input(f"\nPlayer {player}, enter position (1-9): ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print()
+            raise SystemExit(0)
 
         try:
             board = apply_move(board, raw, player)
